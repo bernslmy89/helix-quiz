@@ -583,18 +583,6 @@
 
 </div>
 
-    <h3>Facilitator Access</h3>
-    <p>Enter the facilitator passcode to view the participant log.</p>
-    <input type="password" id="modal-pass" placeholder="••••••••"
-      onkeydown="if(event.key==='Enter')checkPassword()" />
-    <div class="modal-error" id="modal-error"></div>
-    <div class="modal-row">
-      <button class="btn btn-outline" style="flex:1;padding:11px" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-pink" style="flex:1;padding:11px" onclick="checkPassword()">Unlock →</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const QUESTIONS = [
   {
@@ -700,7 +688,6 @@ const QUESTIONS = [
 ];
 
 const KEYS = ['A','B','C','D'];
-const FAC_PASSWORD = 'hrto123';
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyz0icHXFLkW7aH2zFxtaPRwEVHCeJFwrP_Q4Me4k4eBLVSqPpFLa1R7AHPEUYQU7fc/exec';
 
 function submitToSheet(data) {
