@@ -423,61 +423,7 @@
 
   .action-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-  /* ── FACILITATOR ── */
-  .fac-card {
-    background: var(--card);
-    border: 1.5px solid rgba(219,39,119,0.2);
-    border-radius: 20px;
-    padding: 28px; margin-top: 16px;
-    box-shadow: var(--shadow);
-    animation: fadeUp 0.3s ease both;
-  }
-
-  .fac-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
-  }
-
-  .fac-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); }
-
-  .fac-stats { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-
-  .stat-box {
-    background: var(--bg);
-    border: 1px solid rgba(109,40,217,0.1);
-    border-radius: 12px; padding: 12px 16px;
-    font-size: 12px; color: var(--muted);
-    flex: 1; min-width: 90px; text-align: center;
-  }
-
-  .stat-box strong { display: block; font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 2px; }
-
-  .divider { border: none; border-top: 1.5px solid rgba(109,40,217,0.08); margin: 20px 0; }
-
-  .fac-table-wrap { overflow-x: auto; }
-
-  .fac-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 420px; }
-
-  .fac-table th {
-    text-align: left; color: var(--muted);
-    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
-    padding: 8px 12px; border-bottom: 1.5px solid rgba(109,40,217,0.08);
-  }
-
-  .fac-table td {
-    padding: 11px 12px; border-bottom: 1px solid rgba(109,40,217,0.05);
-    color: var(--text); vertical-align: middle;
-  }
-
-  .fac-table tr:last-child td { border-bottom: none; }
-
-  .chip { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-  .chip-gift { background: rgba(109,40,217,0.1); color: var(--purple); border: 1px solid rgba(139,92,246,0.25); }
-  .chip-no   { background: rgba(107,114,128,0.08); color: var(--muted); border: 1px solid rgba(107,114,128,0.15); }
-
-  .empty-state { text-align: center; color: var(--muted); font-size: 13px; padding: 32px; font-style: italic; }
-
-  /* ── MODAL ── */
+  /* ── SCREENS ── */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(30,27,75,0.5);
@@ -518,7 +464,6 @@
 
   .modal-error { font-size: 12px; color: var(--wrong); margin-bottom: 12px; min-height: 16px; font-weight: 600; }
   .modal-row { display: flex; gap: 10px; }
-
 
   /* ── QR ── */
   .qr-section { text-align: center; padding: 20px 0 8px; }
@@ -630,38 +575,14 @@
         <div class="winner-dept" id="winner-dept"></div>
       </div>
       <div class="action-row">
-        <button class="btn btn-outline btn-sm" onclick="retakeQuiz()">🎲 Shuffle &amp; Go Again</button>
-        <button class="btn btn-pink btn-sm" onclick="openFacilitatorModal()">🔒 Facilitator View</button>
+        <button class="btn btn-outline btn-sm" onclick="retakeQuiz()">↩ Try Again</button>
+        
       </div>
-    </div>
-  </div>
-
-  <!-- FACILITATOR -->
-  <div id="screen-fac" class="screen">
-    <div class="header">
-      <div class="eyebrow"><span class="eyebrow-dot"></span>Facilitator View</div>
-      <h1>Participant<br>Log</h1>
-    </div>
-    <div class="fac-card">
-      <div class="fac-header">
-        <div class="fac-title">📋 Submissions</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn btn-blue btn-sm" onclick="downloadCSV()">↓ Download CSV</button>
-          <button class="btn btn-outline btn-sm" onclick="backToResult()">← Back</button>
-        </div>
-      </div>
-      <div class="fac-stats" id="fac-stats"></div>
-      <hr class="divider">
-      <div class="fac-table-wrap" id="fac-table-wrap"></div>
     </div>
   </div>
 
 </div>
 
-<!-- PASSWORD MODAL -->
-<div class="modal-overlay" id="modal" style="display:none" onclick="closeModalOnOverlay(event)">
-  <div class="modal">
-    <div class="modal-icon">🔐</div>
     <h3>Facilitator Access</h3>
     <p>Enter the facilitator passcode to view the participant log.</p>
     <input type="password" id="modal-pass" placeholder="••••••••"
@@ -894,7 +815,7 @@ function showResult() {
     document.getElementById('gift-banner').style.display = 'none';
   } else {
     document.getElementById('result-title').textContent = 'Not Bad, Not Bad! 😄';
-    document.getElementById('result-sub').textContent = `${score} out of 10 — every attempt makes you sharper. Give it another shot, the questions are in a different order this time!`;
+    document.getElementById('result-sub').textContent = `${score} out of 10 — every attempt makes you sharper. Give it another shot!`;
     document.getElementById('gift-banner').style.display = 'none';
   }
   const now = new Date();
@@ -916,94 +837,6 @@ function retakeQuiz() {
   document.getElementById('winner-flash').style.display = 'none';
   showScreen('screen-reg');
 }
-
-function openFacilitatorModal() {
-  document.getElementById('modal-pass').value = '';
-  document.getElementById('modal-error').textContent = '';
-  document.getElementById('modal').style.display = 'flex';
-  setTimeout(() => document.getElementById('modal-pass').focus(), 100);
-}
-
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
-function closeModalOnOverlay(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
-}
-
-function checkPassword() {
-  const val = document.getElementById('modal-pass').value;
-  if (val === FAC_PASSWORD) {
-    closeModal();
-    showFacilitatorPanel();
-  } else {
-    document.getElementById('modal-error').textContent = 'Incorrect passcode. Please try again.';
-    document.getElementById('modal-pass').value = '';
-    document.getElementById('modal-pass').focus();
-  }
-}
-
-function showFacilitatorPanel() {
-  showScreen('screen-fac');
-  const total = participants.length;
-  const gifts = participants.filter(p => p.qualifies === 'Yes').length;
-  const avg = total ? (participants.reduce((s, p) => s + p.score, 0) / total).toFixed(1) : '—';
-  document.getElementById('fac-stats').innerHTML = `
-    <div class="stat-box"><strong>${total}</strong>Participants</div>
-    <div class="stat-box"><strong>${gifts}</strong>Gift Recipients</div>
-    <div class="stat-box"><strong>${avg}</strong>Avg Score</div>
-  `;
-  const wrap = document.getElementById('fac-table-wrap');
-  if (!total) { wrap.innerHTML = '<div class="empty-state">No submissions recorded yet.</div>'; return; }
-  let html = `<table class="fac-table"><thead><tr>
-    <th>#</th><th>Name</th><th>Department</th><th>Score</th><th>Gift</th><th>Submitted</th>
-  </tr></thead><tbody>`;
-  participants.forEach((p, i) => {
-    const chip = p.qualifies === 'Yes'
-      ? `<span class="chip chip-gift">✓ Yes</span>`
-      : `<span class="chip chip-no">No</span>`;
-    html += `<tr>
-      <td style="color:var(--muted)">${i + 1}</td>
-      <td style="font-weight:600">${p.name}</td>
-      <td style="color:var(--muted)">${p.department}</td>
-      <td style="font-weight:900;font-size:15px">${p.scoreLabel}</td>
-      <td>${chip}</td>
-      <td style="color:var(--muted);font-size:11px">${p.timestamp}</td>
-    </tr>`;
-  });
-  html += '</tbody></table>';
-  wrap.innerHTML = html;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function downloadCSV() {
-  if (!participants.length) { alert('No participant data to export.'); return; }
-  const headers = ['#', 'Name', 'Department', 'Score', 'Qualifies for Gift', 'Submitted At'];
-  const rows = participants.map((p, i) => [i + 1, p.name, p.department, p.scoreLabel, p.qualifies, p.timestamp]);
-  const csv = [headers, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `HELIX_Quiz_Participants_${new Date().toISOString().slice(0, 10)}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function backToResult() { showScreen('screen-result'); }
-
-window.addEventListener('load', function() {
-  try {
-    new QRCode(document.getElementById('qrcode'), {
-      text: 'https://helixquiz.netlify.app/',
-      width: 160, height: 160,
-      colorDark: '#6d28d9',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-  } catch(e) {
-    document.getElementById('qrcode').textContent = 'QR unavailable offline';
-  }
-});
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
