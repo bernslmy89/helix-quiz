@@ -465,21 +465,13 @@
   .modal-error { font-size: 12px; color: var(--wrong); margin-bottom: 12px; min-height: 16px; font-weight: 600; }
   .modal-row { display: flex; gap: 10px; }
 
-  /* ── QR ── */
-  .qr-section { text-align: center; padding: 20px 0 8px; }
-  .qr-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-  .qr-wrap {
-    display: inline-block; background: #fff;
-    padding: 10px; border-radius: 14px;
-    box-shadow: 0 0 0 1px rgba(109,40,217,0.12), 0 8px 32px rgba(109,40,217,0.15);
-  }
-  .qr-url { font-size: 12px; color: var(--purple); font-weight: 600; margin-top: 12px; letter-spacing: 0.5px; }
+
 
   /* ── SCREENS ── */
   .screen { display: none; }
   .screen.active { display: block; }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 </head>
 <body>
 <div class="container">
@@ -506,14 +498,7 @@
       <button class="btn btn-primary" onclick="startQuiz()">Start Quiz →</button>
     </div>
 
-  <!-- QR CODE -->
-  <div class="card qr-section">
-    <div class="qr-label">Scan to access on your device</div>
-    <div class="qr-wrap" id="qrcode"></div>
-    <div class="qr-url">helixquiz.netlify.app</div>
-  </div>
-
-  </div>
+</div>
 
   <!-- QUIZ -->
   <div id="screen-quiz" class="screen">
